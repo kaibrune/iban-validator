@@ -1,66 +1,56 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IBAN Validator</title>
     <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container">
-      <h1>IBAN Validator</h1>
-      <div class="input-wrapper">
-        <input type="text" id="ibanInput" placeholder="Gib eine IBAN ein" />
-        <button class="demo-btn" onclick="setDemo()" aria-label="Demo">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="#d3d3d3"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM8 5C7.17157 5 6.5 5.67157 6.5 6.5V7H4.5V6.5C4.5 4.567 6.067 3 8 3C9.933 3 11.5 4.567 11.5 6.5C11.5 8.433 9.933 10 8 10H7V8H8C8.82843 8 9.5 7.32843 9.5 6.5C9.5 5.67157 8.82843 5 8 5ZM9 11V13H7V11H9Z"
-            ></path>
-          </svg>
+        <h1>IBAN Validator</h1>
+        <div class="input-wrapper">
+            <input type="text" id="ibanInput" placeholder="Gib eine IBAN ein" />
+            <button class="demo-btn" onclick="setDemo()" aria-label="Demo">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="#d3d3d3" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM8 5C7.17157 5 6.5 5.67157 6.5 6.5V7H4.5V6.5C4.5 4.567 6.067 3 8 3C9.933 3 11.5 4.567 11.5 6.5C11.5 8.433 9.933 10 8 10H7V8H8C8.82843 8 9.5 7.32843 9.5 6.5C9.5 5.67157 8.82843 5 8 5ZM9 11V13H7V11H9Z">
+                    </path>
+                </svg>
+            </button>
+            <button class="clear-btn" onclick="clearInput()" aria-label="Clear">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="#d3d3d3" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0 8L6 2H16V14H6L0 8ZM6.79289 6.20711L8.58579 8L6.79289 9.79289L8.20711 11.2071L10 9.41421L11.7929 11.2071L13.2071 9.79289L11.4142 8L13.2071 6.20711L11.7929 4.79289L10 6.58579L8.20711 4.79289L6.79289 6.20711Z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <button class="submit-btn" onclick="checkIBAN()">
+            Pseudonymisiert überprüfen
         </button>
-        <button class="clear-btn" onclick="clearInput()" aria-label="Clear">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="#d3d3d3"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M0 8L6 2H16V14H6L0 8ZM6.79289 6.20711L8.58579 8L6.79289 9.79289L8.20711 11.2071L10 9.41421L11.7929 11.2071L13.2071 9.79289L11.4142 8L13.2071 6.20711L11.7929 4.79289L10 6.58579L8.20711 4.79289L6.79289 6.20711Z"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <button class="submit-btn" onclick="checkIBAN()">
-        Pseudonymisiert überprüfen
-      </button>
-      <div id="result" class="result-container"></div>
+        <div id="result" class="result-container"></div>
     </div>
     <div id="toast-container"></div>
     <div id="modal" class="modal-overlay" style="display: none">
-      <div class="modal">
-        <h2>Demo-Betrieb</h2>
-        <p>
-          Diese Seite dient nur zu Demo-Zwecken. Bitte geben Sie keine echten
-          Daten ein. Die eingebenen Daten werden mit openiban.com teilweise
-          pseudonymisiert abgeglichen. Bitte vergewisseren Sie sich, dass die
-          eingebenen Daten für diesen Zweck freigegeben sind. Es wird keine Haftung
-          übernommen.
-        </p>
-        <button onclick="closeModal()">Verstanden</button>
-      </div>
+        <div class="modal">
+            <h2>Demo-Betrieb</h2>
+            <p>
+                Diese Seite dient nur zu Demo-Zwecken. Bitte geben Sie keine echten
+                Daten ein. Die eingebenen Daten werden mit openiban.com teilweise
+                pseudonymisiert abgeglichen. Bitte vergewisseren Sie sich, dass die
+                eingebenen Daten für diesen Zweck freigegeben sind. Es wird keine Haftung
+                übernommen.
+            </p>
+            <p>
+                <b>Hinweis</b>: Dieser Hinweis wird nach dem Schließen für 7 Tage nicht mehr angezeigt.
+            </p>
+            <button onclick="closeModal()">Verstanden</button>
+        </div>
     </div>
     <script src="js/script.js"></script>
-  </body>
+</body>
+
 </html>
